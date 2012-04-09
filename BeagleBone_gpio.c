@@ -32,42 +32,14 @@ int bitRead(unsigned int groupOfBits, int bitLoc)
 void pulsePin(struct gpioID enabled_gpio[],unsigned int data_to_write,int nbr_selectedPins, int pinID, int delay)
 {
 	data_to_write=bitWrite(data_to_write,1,pinID);
-	digitalWrite_multiple(enabled_gpio,6,data_to_write); 
+	digitalWrite_multiple(enabled_gpio,nbr_selectedPins,data_to_write); 
 	if (delay>=0) delayms(delay);
 
 	data_to_write=bitWrite(data_to_write,0,pinID);
-	digitalWrite_multiple(enabled_gpio,6,data_to_write);
+	digitalWrite_multiple(enabled_gpio,nbr_selectedPins,data_to_write);
 	if (delay>=0) delayms(delay);
 }
 
-/** 
- * @brief Pulses a particular bit (goes HIGH then LOW) with a specify delay
- * @param selected_GPIOs[] An valid (initialized) array of gpioID
- * @param data_to_write An unsigned integer (32 bits), where each bit contains the 
- * information regarding the status of each pin: 1=turn pin ON, 0=turn pin OFF
- * @param nbr_selectedPins Number of pins that were specified by the user
- * @param print_to_screen This specifies if some extra information is to be displayed in the 
- * user screen. It has no other purpose than debugging your code. If print_to_screen == 1, data will
- * be displayed on the terminal window; otherwise it will not.
- * @param pinDescription[] A constant array containing the description of each pin
- * @param pinID ID of pin we want to pulse
- * @param delay Delay in seconds that will define the interval between signal states
- **/ 
- /*
-void pulsePin(struct gpioID enabled_gpio[],unsigned int data_to_write,int nbr_selectedPins, int print_to_screen, const char *pinDescription[], int pinID, int delay)
-{
-	if (print_to_screen) printf("========== START: PULSING PIN %d ==========\n",pinID);
-	data_to_write=bitWrite(data_to_write,1,pinID);
-	turn_ON_OFF_pins(enabled_gpio,data_to_write,nbr_selectedPins,print_to_screen,pinDescription);
-	sleep(delay);
-	data_to_write=bitWrite(data_to_write,0,pinID);
-	turn_ON_OFF_pins(enabled_gpio,data_to_write,nbr_selectedPins,print_to_screen,pinDescription);
-	sleep(delay); 
-	if (print_to_screen) printf("========== END: PULSING PIN %d ==========\n",pinID);
-}
-*/
-
-//================================================================================
 void write_GPIO_value(int GPIONUMBER, int value)
 {
 	if (DEBUG_GPIO) 
