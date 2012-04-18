@@ -239,7 +239,7 @@ void goto_ScreenLocation(int line, int position,struct gpioID enabled_gpio[])
 {
 	unsigned int data_to_write;
 
-	if (line==1) position=position+40;
+	if (line==1) position=position+64;
 	data_to_write=return_address_in_bitform(position,0);
 	data_to_write=bitWrite(data_to_write,1,0);
 
